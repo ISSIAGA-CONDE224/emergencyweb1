@@ -14,8 +14,8 @@ import {
 } from "./icons";
 
 const menuItems = [
-  { id: 1, label: "Home", icon: HomeIcon, link: "/" },
-  { id: 2, label: "Manage Posts", icon: ArticleIcon, link: "/posts" },
+  { id: 1, label: "Accueil", icon: HomeIcon, link: "/" },
+  { id: 2, label: "Urgences", icon: ArticleIcon, link: "/posts" },
   { id: 3, label: "Manage Users", icon: UsersIcon, link: "/users" },
   { id: 4, label: "Manage Tutorials", icon: VideosIcon, link: "/tutorials" },
 ];
