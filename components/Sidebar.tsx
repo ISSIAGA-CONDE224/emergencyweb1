@@ -15,9 +15,8 @@ import {
 
 const menuItems = [
   { id: 1, label: "Accueil", icon: HomeIcon, link: "/" },
-  { id: 2, label: "Urgences", icon: ArticleIcon, link: "/posts" },
-  { id: 3, label: "Manage Users", icon: UsersIcon, link: "/users" },
-  { id: 4, label: "Manage Tutorials", icon: VideosIcon, link: "/tutorials" },
+  { id: 2, label: "Urgences en attente", icon: ArticleIcon, link: "/posts" },
+  { id: 3, label: "Urgences traitees", icon: UsersIcon, link: "/users" },
 ];
 
 const Sidebar = () => {
@@ -73,14 +72,7 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative">
           <div className="flex items-center pl-1 gap-4">
-            <LogoIcon />
-            <span
-              className={classNames("mt-2 text-lg font-medium text-text", {
-                hidden: toggleCollapse,
-              })}
-            >
-              Logo
-            </span>
+            <LogoIcon/>
           </div>
           {isCollapsible && (
             <button

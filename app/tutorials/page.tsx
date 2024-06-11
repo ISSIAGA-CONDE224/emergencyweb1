@@ -3,7 +3,7 @@ import Layout from '../../components/Layout'
 
 const tutorials = () => {
   return (
-    <Layout>tutorials</Layout>
+    <Layout><div text-center text-3xl text-black>Les urgences terminees</div></Layout>
   )
 }
 
