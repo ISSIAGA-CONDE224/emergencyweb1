@@ -1,7 +1,7 @@
 "use client"
 import classNames from "classnames";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useMemo } from "react";
 import {
   ArticleIcon,
@@ -12,6 +12,7 @@ import {
   UsersIcon,
   VideosIcon,
 } from "./icons";
+import { signOut } from "next-auth/react";
 
 const menuItems = [
   { id: 1, label: "Accueil", icon: HomeIcon, link: "/" },
@@ -60,6 +61,11 @@ const Sidebar = () => {
 
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
+  };
+  const router = useRouter();
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    router.push("/auth/login");
   };
 
   return (
@@ -116,7 +122,7 @@ const Sidebar = () => {
           <LogoutIcon />
         </div>
         {!toggleCollapse && (
-          <span className={classNames("text-md font-medium text-text-light")}>
+          <span onClick={handleLogout} className={classNames("text-md font-medium text-text-light")}>
             Logout
           </span>
         )}
