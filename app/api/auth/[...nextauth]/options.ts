@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
           password: string;
         };
         //doit etre remplacer par une requete vers l'utilisateur de firebase authentification
-        const user = { id: "42", name: "condeissiaga259@gmail.com", password: "password1234" };
+        const user =  { id: "42", name: "condeissiaga259@gmail.com", password: "password1234" };
         if (
           user?.name === credentials?.email &&
           credentials?.password === user.password
