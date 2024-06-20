@@ -25,6 +25,10 @@ export type Emergency = {
     imageUrl: string;
     isTreated: string;
     phone: string;
+    location:  {
+        latitude: 0,
+        longitude: 0,
+      },
 };
 
 export const columns:ColumnDef<Emergency>[] = [

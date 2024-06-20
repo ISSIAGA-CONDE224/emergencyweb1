@@ -9,7 +9,7 @@ import {
 function Logo({ fill = "#3B81F6", ...rest }) {
   return (
     <Avatar>
-      <Image width={500} height={500} src={logo} alt="@shadcn" />
+      <Image width={800} height={800} src={logo} alt="@shadcn" />
     <AvatarFallback>CN</AvatarFallback>
   </Avatar>
   );

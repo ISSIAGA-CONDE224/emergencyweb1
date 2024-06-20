@@ -1,8 +1,8 @@
-"use client"
+import React, { useState, useMemo } from "react";
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState, useMemo } from "react";
+import { signOut } from "next-auth/react";
 import {
   ArticleIcon,
   CollapsIcon,
@@ -12,12 +12,11 @@ import {
   UsersIcon,
   VideosIcon,
 } from "./icons";
-import { signOut } from "next-auth/react";
 
 const menuItems = [
-  { id: 1, label: "Accueil", icon: HomeIcon, link: "/" },
+  { id: 1, label: "Accueil", icon: HomeIcon, link: "/tutorials" },
   { id: 2, label: "Urgences en attente", icon: ArticleIcon, link: "/posts" },
-  { id: 3, label: "Urgences traitees", icon: UsersIcon, link: "/users" },
+  { id: 3, label: "Urgences traitées", icon: UsersIcon, link: "/users" },
 ];
 
 const Sidebar = () => {
@@ -25,22 +24,21 @@ const Sidebar = () => {
   const [isCollapsible, setIsCollapsible] = useState(false);
 
   const pathname = usePathname();
-
   const activeMenu = useMemo(
     () => menuItems.find((menu) => menu.link === pathname),
     [pathname]
   );
 
   const wrapperClasses = classNames(
-    "h-screen px-4 pt-8 pb-4 bg-light flex justify-between flex-col",
+    "h-screen px-4 pt-8 pb-4 bg-blue-500 text-white flex justify-between flex-col",
     {
-      ["w-80"]: !toggleCollapse,
-      ["w-20"]: toggleCollapse,
+      "w-80": !toggleCollapse,
+      "w-20": toggleCollapse,
     }
   );
 
   const collapseIconClasses = classNames(
-    "p-4 rounded bg-light-lighter absolute right-0",
+    "p-4 rounded bg-blue-300 absolute right-0",
     {
       "rotate-180": toggleCollapse,
     }
@@ -48,9 +46,9 @@ const Sidebar = () => {
 
   const getNavItemClasses = (menu:any) => {
     return classNames(
-      "flex items-center cursor-pointer hover:bg-light-lighter rounded w-full overflow-hidden whitespace-nowrap",
+      "flex items-center cursor-pointer hover:bg-blue-400 rounded w-full overflow-hidden whitespace-nowrap",
       {
-        ["bg-light-lighter"]: activeMenu?.id === menu.id,
+        "bg-blue-400": activeMenu?.id === menu.id,
       }
     );
   };
@@ -62,6 +60,7 @@ const Sidebar = () => {
   const handleSidebarToggle = () => {
     setToggleCollapse(!toggleCollapse);
   };
+
   const router = useRouter();
   const handleLogout = async () => {
     await signOut({ redirect: false });
@@ -78,14 +77,16 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative">
           <div className="flex items-center pl-1 gap-4">
-            <LogoIcon/>
+            <div className="bg-white rounded-full p-2">
+              <LogoIcon className="w-30 h-30 text-white" /> {/* Ajustement de la taille du logo */}
+            </div>
           </div>
           {isCollapsible && (
             <button
               className={collapseIconClasses}
               onClick={handleSidebarToggle}
             >
-              <CollapsIcon />
+              <CollapsIcon className="text-white" />
             </button>
           )}
         </div>
@@ -97,13 +98,13 @@ const Sidebar = () => {
               <div className={classes} key={menu.id}>
                 <Link href={menu.link}>
                   <div className="flex py-4 px-3 items-center w-full h-full">
-                    <div style={{ width: "2.5rem" }}>
-                      <Icon />
+                    <div className="text-white" style={{ width: "2.5rem" }}>
+                      <Icon className="text-white" />
                     </div>
                     {!toggleCollapse && (
                       <span
                         className={classNames(
-                          "text-md font-medium text-text-light"
+                          "text-md font-medium"
                         )}
                       >
                         {menu.label}
@@ -118,11 +119,11 @@ const Sidebar = () => {
       </div>
 
       <div className={`${getNavItemClasses({})} px-3 py-4`}>
-        <div style={{ width: "2.5rem" }}>
-          <LogoutIcon />
+        <div className="text-white" style={{ width: "2.5rem" }}>
+          <LogoutIcon className="text-white" />
         </div>
         {!toggleCollapse && (
-          <span onClick={handleLogout} className={classNames("text-md font-medium text-text-light")}>
+          <span onClick={handleLogout} className={classNames("text-md font-medium")}>
             Logout
           </span>
         )}
