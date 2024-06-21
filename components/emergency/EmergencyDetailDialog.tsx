@@ -184,8 +184,10 @@ const EmergencyDetailDialog: React.FC<EmergencyDetailDialogProps> = () => {
     setEmergencyReport(event.target.value);
   };
 
-  const googleMapsUrl = `http://maps.google.com/maps?q=${data.location.latitude}&ll=${data.location.longitude}&z=17`;
-
+  const googleMapsUrl =  `http://maps.google.com/maps?q=${data.location}&ll=${data.location}&z=17`;
+  //`http://maps.google.com/maps?q=${data.location.latitude}&ll=${data.location.longitude}&z=17`;
+  console.log("first",data.location);
+  console.log("first",googleMapsUrl);
   return (
     <AlertDialog open={isDialogOpen}>
       <AlertDialogContent>
