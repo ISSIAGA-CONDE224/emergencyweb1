@@ -77,10 +77,7 @@ async function getEmergencyData(): Promise<Emergency[]> {
       imageUrl: doc.data().imageUrl,
       isTreated: doc.data().isTreat,
       phone: doc.data().phone,
-      location:{
-        longitude:doc.data().location,
-        latitude:doc.data().location,
-      }
+      location:doc.data().location,
       
     };
     dataArray.push(Emergency);
@@ -90,13 +87,7 @@ async function getEmergencyData(): Promise<Emergency[]> {
 
 
 
-// const MapLink: ({ latitude, longitude }: {
-//   latitude: any;
-//   longitude: any;
-// }) => {
-//   const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
-// };
 
 const Posts = async () => {
   const { selectedEmergency, isDialogOpen, toggleDialog } = useContext(EmergencyContext);
