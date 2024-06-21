@@ -33,6 +33,7 @@ export async function getEmergencyData(): Promise<EmergencyData> {
     };
 
     if (doc.data().isTreat) {
+      console.log("danger🤦‍♂️🤦‍♂️🤦‍♂️",doc.data);
       treatedEmergencies.push(emergency);
     } else {
       pendingEmergencies.push(emergency);

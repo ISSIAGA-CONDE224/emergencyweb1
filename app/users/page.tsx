@@ -32,6 +32,31 @@ export async function getEmergencyData(): Promise<Emergency[]> {
   return dataArray
 }
 
+
+export async function getEmergencynottreaData(): Promise<Emergency[]> {
+  const q = query(collection(db, "emergencies"), where("isTreat", "==", false), orderBy("createdAt", "asc"));
+  const querySnapshot = await getDocs(q);
+  const dataArray: Emergency[] = [];
+  querySnapshot.forEach((doc) => {
+    const Emergency: Emergency = {
+
+      id: doc.id,
+      status: doc.data().isTreat ? 'Traitee' : 'En Attente',
+      name: doc.data().name,
+      report: doc.data().report,
+      emergencyType: doc.data().emergencyType,
+      date: doc.data().createdAt,
+      description: doc.data().description,
+      imageUrl: doc.data().imageUrl,
+      isTreated: doc.data().isTreat,
+      phone: doc.data().phone,
+      location:doc.data().location,
+    }
+    dataArray.push(Emergency);
+  });
+  return dataArray
+}
+
 const Users = async () => {
   const { selectedEmergency, isDialogOpen, toggleDialog } = useContext(EmergencyContext);
   const data = await getEmergencyData();

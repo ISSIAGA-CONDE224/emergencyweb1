@@ -1,8 +1,166 @@
+// "use client";
+
+// import React, { useState, useMemo } from "react";
+// import classNames from "classnames";
+// import Link from "next/link";
+// import { usePathname, useRouter } from "next/navigation";
+// import { signOut, useSession } from "next-auth/react";
+// import {
+//   ArticleIcon,
+//   CollapsIcon,
+//   HomeIcon,
+//   LogoIcon,
+//   LogoutIcon,
+//   UsersIcon,
+// } from "./icons";
+
+// const menuItems = [
+//   { id: 1, label: "Accueil", icon: HomeIcon, link: "/tutorials" },
+//   { id: 2, label: "Urgences en attente", icon: ArticleIcon, link: "/posts" },
+//   { id: 3, label: "Urgences traitées", icon: UsersIcon, link: "/users" },
+//   { id: 4, label: "Créer un compte", icon: UsersIcon, link: "/newUser" }, // New link
+// ];
+
+// const Sidebar = () => {
+//   const [toggleCollapse, setToggleCollapse] = useState(false);
+//   const [isCollapsible, setIsCollapsible] = useState(false);
+
+//   const pathname = usePathname();
+//   const activeMenu = useMemo(
+//     () => menuItems.find((menu) => menu.link === pathname),
+//     [pathname]
+//   );
+
+//   const wrapperClasses = classNames(
+//     "h-screen px-4 pt-8 pb-4 bg-blue-500 text-white flex justify-between flex-col",
+//     {
+//       "w-80": !toggleCollapse,
+//       "w-20": toggleCollapse,
+//     }
+//   );
+
+//   const collapseIconClasses = classNames(
+//     "p-4 rounded bg-blue-300 absolute right-0",
+//     {
+//       "rotate-180": toggleCollapse,
+//     }
+//   );
+
+//   const getNavItemClasses = (menu: any) => {
+//     return classNames(
+//       "flex items-center cursor-pointer hover:bg-blue-400 rounded w-full overflow-hidden whitespace-nowrap",
+//       {
+//         "bg-blue-400": activeMenu?.id === menu.id,
+//       }
+//     );
+//   };
+
+//   const onMouseOver = () => {
+//     setIsCollapsible(!isCollapsible);
+//   };
+
+//   const handleSidebarToggle = () => {
+//     setToggleCollapse(!toggleCollapse);
+//   };
+
+//   const router = useRouter();
+//   const handleLogout = async () => {
+//     await signOut({ redirect: false });
+//     router.push("/auth/login");
+//   };
+
+//   const { data: session } = useSession();
+
+//   console.log("vvoir user : ", session);
+
+//   return (
+//     <div
+//       className={wrapperClasses}
+//       onMouseEnter={onMouseOver}
+//       onMouseLeave={onMouseOver}
+//       style={{ transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
+//     >
+//       <div className="flex flex-col">
+//         <div className="flex items-center justify-between relative">
+//           <div className="flex items-center pl-1 gap-4">
+//             <div className="bg-white rounded-full p-2">
+//               <LogoIcon className="w-50 h-50 text-white" />
+//             </div>
+//           </div>
+//           {isCollapsible && (
+//             <button
+//               className={collapseIconClasses}
+//               onClick={handleSidebarToggle}
+//             >
+//               <CollapsIcon className="text-white" />
+//             </button>
+//           )}
+//         </div>
+
+//         <div className="flex flex-col items-start mt-24">
+//           {menuItems.map(({ icon: Icon, ...menu }) => {
+//             const classes = getNavItemClasses(menu);
+//             return (
+//               <div className={classes} key={menu.id}>
+//                 <Link href={menu.link}>
+//                   <div className="flex py-4 px-3 items-center w-full h-full">
+//                     <div className="text-white" style={{ width: "2.5rem" }}>
+//                       <Icon className="text-white" />
+//                     </div>
+//                     {!toggleCollapse && (
+//                       <span
+//                         className={classNames("text-md font-medium text-white")}
+//                       >
+//                         {menu.label}
+//                       </span>
+//                     )}
+//                   </div>
+//                 </Link>
+//               </div>
+//             );
+//           })}
+//         </div>
+//       </div>
+
+//       <div className="flex flex-col items-start">
+//         {session?.user && (
+//           <div className="flex items-center px-3 py-4">
+//             <div className="text-white" style={{ width: "2.5rem" }}>
+//               <UsersIcon className="text-white" />
+//             </div>
+//             {!toggleCollapse && (
+//               <span className={classNames("text-md font-medium text-white")}>
+//                 {session.user.name || session.user.email}
+//               </span>
+//             )}
+//           </div>
+//         )}
+
+//         <div
+//           className={`${getNavItemClasses({})} px-3 py-4`}
+//           onClick={handleLogout}
+//         >
+//           <div className="text-white" style={{ width: "2.5rem" }}>
+//             <LogoutIcon className="text-white" />
+//           </div>
+//           {!toggleCollapse && (
+//             <span className={classNames("text-md font-medium text-white")}>
+//               Logout
+//             </span>
+//           )}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Sidebar;"use client";"use client";
+
 import React, { useState, useMemo } from "react";
 import classNames from "classnames";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import {
   ArticleIcon,
   CollapsIcon,
@@ -10,13 +168,13 @@ import {
   LogoIcon,
   LogoutIcon,
   UsersIcon,
-  VideosIcon,
 } from "./icons";
 
 const menuItems = [
   { id: 1, label: "Accueil", icon: HomeIcon, link: "/tutorials" },
   { id: 2, label: "Urgences en attente", icon: ArticleIcon, link: "/posts" },
   { id: 3, label: "Urgences traitées", icon: UsersIcon, link: "/users" },
+  { id: 4, label: "Créer un compte", icon: UsersIcon, link: "/newUser" }, // New link
 ];
 
 const Sidebar = () => {
@@ -30,7 +188,7 @@ const Sidebar = () => {
   );
 
   const wrapperClasses = classNames(
-    "h-screen px-4 pt-8 pb-4 bg-blue-500 text-white flex justify-between flex-col",
+    "px-4 pt-8 pb-4 bg-blue-500 text-white flex justify-between flex-col h-full",
     {
       "w-80": !toggleCollapse,
       "w-20": toggleCollapse,
@@ -67,6 +225,8 @@ const Sidebar = () => {
     router.push("/auth/login");
   };
 
+  const { data: session } = useSession();
+
   return (
     <div
       className={wrapperClasses}
@@ -78,7 +238,7 @@ const Sidebar = () => {
         <div className="flex items-center justify-between relative">
           <div className="flex items-center pl-1 gap-4">
             <div className="bg-white rounded-full p-2">
-              <LogoIcon className="w-30 h-30 text-white" /> {/* Ajustement de la taille du logo */}
+              <LogoIcon className="w-50 h-50 text-white" />
             </div>
           </div>
           {isCollapsible && (
@@ -103,9 +263,7 @@ const Sidebar = () => {
                     </div>
                     {!toggleCollapse && (
                       <span
-                        className={classNames(
-                          "text-md font-medium"
-                        )}
+                        className={classNames("text-md font-medium text-white")}
                       >
                         {menu.label}
                       </span>
@@ -118,15 +276,33 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className={`${getNavItemClasses({})} px-3 py-4`}>
-        <div className="text-white" style={{ width: "2.5rem" }}>
-          <LogoutIcon className="text-white" />
-        </div>
-        {!toggleCollapse && (
-          <span onClick={handleLogout} className={classNames("text-md font-medium")}>
-            Logout
-          </span>
+      <div className="flex flex-col items-start mt-auto">
+        {session?.user && (
+          <div className="flex items-center px-3 py-4">
+            <div className="text-white" style={{ width: "2.5rem" }}>
+              <UsersIcon className="text-white" />
+            </div>
+            {!toggleCollapse && (
+              <span className={classNames("text-md font-medium text-white")}>
+                {session.user.name || session.user.email}
+              </span>
+            )}
+          </div>
         )}
+
+        <div
+          className={`${getNavItemClasses({})} px-3 py-4`}
+          onClick={handleLogout}
+        >
+          <div className="text-white" style={{ width: "2.5rem" }}>
+            <LogoutIcon className="text-white" />
+          </div>
+          {!toggleCollapse && (
+            <span className={classNames("text-md font-medium text-white")}>
+              Logout
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

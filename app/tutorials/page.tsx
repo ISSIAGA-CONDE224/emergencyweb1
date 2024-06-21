@@ -156,7 +156,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { getEmergencyData } from "../users/page";
+import { getEmergencyData, getEmergencynottreaData } from "../users/page";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -203,7 +203,9 @@ const EmergencyStats = () => {
   useEffect(() => {
     async function fetchData() {
       const emergencyData = await getEmergencyData();
-      
+      const emergencytreaData=await getEmergencynottreaData()
+      console.log("ghggghhhh👍👌👌😒",emergencytreaData);
+ 
       const treatedStats = emergencyData.filter(e => e.isTreated).reduce((acc, emergency) => {
         const type = emergency.emergencyType;
         if (acc[type]) {
@@ -227,7 +229,7 @@ const EmergencyStats = () => {
         ],
       });
 
-      const pendingStats = emergencyData.filter(e => !e.isTreated).reduce((acc, emergency) => {
+      const pendingStats = emergencytreaData.filter(e => !e.isTreated).reduce((acc, emergency) => {
         const type = emergency.emergencyType;
 
         if (acc[type]) {
@@ -278,6 +280,9 @@ const EmergencyStats = () => {
     }
 
     fetchData();
+    console.log("hjkloikujyiopoiujio");
+   
+    console.log(treatedData);
   }, []);
 console.log('bonjour 🤦‍♀️🤣🤷‍♀️😍',pendingData);
   return (
